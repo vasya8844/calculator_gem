@@ -5,9 +5,12 @@ gem install calculator_gem
 ## Usage example
 ```
 require 'calculator_gem'
-pp CalculatorGem::Calculator.calc
+pp CalculatorGem::Calculator.call(
+  amount: 200,
+  commission_amount: 10, commission_percent: 20
+)
 ```
 
-## Rub test
+## Run tests
 bundle
 rspec

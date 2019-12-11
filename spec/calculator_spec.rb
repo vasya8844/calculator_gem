@@ -1,14 +1,25 @@
 describe CalculatorGem::Calculator do
-  let(:amount) { 200 }
-  let(:commission_amount) { 10 }
-  let(:commission_percent) { 20 }
-  it 'calculates net and commission' do
-    net, commission = described_class.call(
-      amount: 200,
-      commission_amount: commission_amount, commission_percent: commission_percent
-    )
+  context 'when commission is round number' do
+    it 'calculates netto_amount and commission' do
+      netto_amount, commission = described_class.call(
+        amount: 100,
+        commission_amount: 1, commission_percent: 20
+      )
 
-    expect(net).to eq(150)
-    expect(commission).to eq(50)
+      expect(netto_amount).to eq(79)
+      expect(commission).to eq(21)
+    end
+  end
+
+  context 'when commission is not round number' do
+    it 'calculates netto_amount and commission' do
+      netto_amount, commission = described_class.call(
+        amount: 10,
+        commission_amount: 1.25, commission_percent: 28
+      )
+
+      expect(netto_amount).to eq(5.95)
+      expect(commission).to eq(4.05)
+    end
   end
 end
